@@ -1,6 +1,9 @@
 using BusinessAccountantService.Managers;
 using BusinessAccountantService.Models;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -26,6 +29,7 @@ namespace BusinessAccountantService
 
         private RepairItem _originalItem;
         private RepairItem _editedItem;
+        private ICollectionView _serviceView;
 
         public EditServiceRepairRecordWindow(RepairItem item)
         {
@@ -42,14 +46,64 @@ namespace BusinessAccountantService
             };
 
             // Populate the UI with current values
-            ServiceNameBox.Text = item.Name;
+            ServiceSearchBox.Text = item.Name;
             PriceBox.Text = item.Price.ToString("F2");
+            
+            // Load service suggestions
+            LoadServiceSuggestions();
+        }
+
+        private void LoadServiceSuggestions()
+        {
+            // Загружаем список один раз
+            var allServices = _repairManager.GetServiceSuggestions("");
+            _serviceView = CollectionViewSource.GetDefaultView(allServices);
+
+            // Привязываем источник один раз!
+            ServiceSearchBox.ItemsSource = _serviceView;
+            ServiceSearchBox.Focus();
+        }
+
+        // Поиск в прайс-листе по мере ввода текста
+        private void ServiceSearchBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up || e.Key == Key.Down || e.Key == Key.Enter || e.Key == Key.Escape) return;
+
+            // Берем текст прямо из TextBox внутри ComboBox, чтобы избежать лагов
+            var textBox = (TextBox)ServiceSearchBox.Template.FindName("PART_EditableTextBox", ServiceSearchBox);
+            string query = textBox?.Text.ToLower() ?? ServiceSearchBox.Text.ToLower();
+
+            _serviceView.Filter = item =>
+            {
+                if (string.IsNullOrEmpty(query)) return true;
+                return (item as ServiceItem).Name.ToLower().Contains(query);
+            };
+
+            ServiceSearchBox.IsDropDownOpen = true;
+
+            // Возвращаем курсор в конец, чтобы текст не затирался при автодополнении
+            if (textBox != null)
+            {
+                textBox.SelectionStart = textBox.Text.Length;
+                textBox.SelectionLength = 0;
+            }
+        }
+
+        // Если выбрали готовую услугу — подставляем её цену
+        private void ServiceSearchBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ServiceSearchBox.SelectedItem is ServiceItem selected)
+            {
+                PriceBox.Text = selected.Price.ToString();
+                PriceBox.Focus();
+                PriceBox.SelectAll();
+            }
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             // Validate input
-            string name = ServiceNameBox.Text.Trim();
+            string name = ServiceSearchBox.Text.Trim();
             decimal.TryParse(PriceBox.Text.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal price);
 
             if (string.IsNullOrWhiteSpace(name) || price <= 0)
