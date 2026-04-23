@@ -1,0 +1,72 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "agents": {
+	"sisyphus" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "hephaestus" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "prometheus" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "oracle" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "librarian" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "explore" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "multimodal-looker" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "metis" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "momus" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "atlas" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "sisyphus-junior" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    }
+  },
+  "categories": {
+    "visual-engineering" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "ultrabrain" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "deep" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "artistry" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "quick" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "unspecified-low" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "unspecified-high" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    },
+    "writing" : {
+      "model" : "llama-cpp/Devstral-Small-2"
+    }
+  },
+  "background_task": {
+    "providerConcurrency": {
+      "llama-cpp": 2
+    },
+    "modelConcurrency": {
+      "llama-cpp/Devstral-Small-2": 2
+    }
+  }
+}
