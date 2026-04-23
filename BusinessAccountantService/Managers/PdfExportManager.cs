@@ -311,9 +311,9 @@ namespace BusinessAccountantService.Managers
                         });
                     });
                 });
-            }).GeneratePdf($"{client.Name}_заказ_{repair.Id}_акт_выдачм.pdf");
+            }).GeneratePdf($"{client.Name}_заказ_{repair.Id}_акт_выдачи.pdf");
 
-            Process.Start(new ProcessStartInfo($"{client.Name}_заказ_{repair.Id}_акт_выдачм.pdf") { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo($"{client.Name}_заказ_{repair.Id}_акт_выдачи.pdf") { UseShellExecute = true });
         }
 
 
