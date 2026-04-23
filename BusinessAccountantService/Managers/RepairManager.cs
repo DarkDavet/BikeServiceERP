@@ -220,7 +220,7 @@ namespace BusinessAccountantService.Managers
             {
                 connection.Open();
                 var command = connection.CreateCommand();
-                command.CommandText = "SELECT ServiceName, DefaultPrice FROM ServicePriceList WHERE ServiceName LIKE $q LIMIT 10";
+                command.CommandText = "SELECT ServiceName, DefaultPrice FROM ServicePriceList WHERE ServiceName LIKE $q";
                 command.Parameters.AddWithValue("$q", "%" + query + "%");
 
                 using (var reader = command.ExecuteReader())
