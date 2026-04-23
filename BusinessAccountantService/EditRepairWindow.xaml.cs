@@ -67,6 +67,9 @@ namespace BusinessAccountantService
             var itemsFromDb = _inventoryManager.GetRepairItems(repair.Id);
             _orderItems = new ObservableCollection<RepairItem>(itemsFromDb);
             OrderItemsGrid.ItemsSource = _orderItems;
+            
+            // 5. Подписываемся на двойной клик
+            OrderItemsGrid.MouseDoubleClick += OrderItemsGrid_MouseDoubleClick;
 
             _orderItems.CollectionChanged += (s, e) => UpdateTotals();
             UpdateTotals();
@@ -239,6 +242,36 @@ namespace BusinessAccountantService
             BtnDelete.Visibility = Visibility.Collapsed;
 
             this.Title = $"ПРОСМОТР ЗАКАЗА №{_currentRepair.Id} (ВЫДАН)";
+        }
+
+        private void OrderItemsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (OrderItemsGrid.SelectedItem is RepairItem selectedItem)
+            {
+                // Only allow editing of service records (where ProductId is null)
+                if (selectedItem.ProductId == null)
+                {
+                    var editWindow = new EditServiceRepairRecordWindow(selectedItem)
+                    {
+                        Owner = this
+                    };
+
+                    if (editWindow.ShowDialog() == true)
+                    {
+                        // Update the item with the edited values
+                        selectedItem.Name = editWindow.SelectedResult.Name;
+                        selectedItem.Price = editWindow.SelectedResult.Price;
+                        // Note: Total is a read-only property, we'll let the property changed events handle recalculation
+                        // Refresh the grid to show updated values
+                        OrderItemsGrid.Items.Refresh();
+                        UpdateTotals();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Редактирование запчастей в этом окне не предусмотрено.");
+                }
+            }
         }
 
     }
