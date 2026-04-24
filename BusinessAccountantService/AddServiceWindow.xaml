@@ -5,32 +5,121 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BusinessAccountantService"
         mc:Ignorable="d"
-        Title="Добавить новую услугу" Height="280" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
-    <Grid Margin="20">
+        Title="Добавить новую услугу" Height="400" Width="400" 
+        WindowStartupLocation="CenterOwner" Background="#F5F6FA"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <!-- 1. ГЛАВНАЯ КНОПКА (СОХРАНИТЬ) -->
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="20,0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="8"/>
+                </Style>
+            </Style.Resources>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.9"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- 2. ВТОРОСТЕПЕННАЯ КНОПКА (ОТМЕНА) -->
+        <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="20,0"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#7F8C8D"/>
+            <Setter Property="Background" Value="#E0E2E6"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="8"/>
+                </Style>
+            </Style.Resources>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#D1D4D9"/>
+                    <Setter Property="Foreground" Value="#2C3E50"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- 3. СТИЛЬ ПОЛЕЙ ВВОДА -->
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="BorderBrush" Value="#DCDDE1"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Background" Value="White"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="8"/>
+                </Style>
+            </Style.Resources>
+            <Style.Triggers>
+                <Trigger Property="IsKeyboardFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#27AE60"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="25">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <!-- Шапка -->
+            <RowDefinition Height="*"/>
+            <!-- Поля -->
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <!-- Кнопки -->
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="0,0,0,15">
-            <TextBlock Text="Название услуги:" FontWeight="SemiBold" Margin="0,0,0,5"/>
-            <TextBox x:Name="ServiceNameTextBox" Text="" TextWrapping="Wrap" Height="25" FontSize="13"/>
+        <!-- ШАПКА -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,25">
+            <TextBlock Text="ДОБАВИТЬ УСЛУГУ" FontSize="20" FontWeight="Black" Foreground="#2C3E50"/>
+            <Separator Height="2" Background="#27AE60" Width="40" HorizontalAlignment="Left" Margin="2,5,0,0"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Margin="0,0,0,15">
-            <TextBlock Text="Цена услуги:" FontWeight="SemiBold" Margin="0,0,0,5"/>
-            <TextBox x:Name="ServicePriceTextBox" Text="" TextWrapping="Wrap" Height="25" FontSize="13"/>
+        <!-- ПОЛЯ ВВОДА -->
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="НАЗВАНИЕ УСЛУГИ" FontSize="9" FontWeight="Bold" Foreground="#95A5A6" Margin="2,0,0,5"/>
+            <TextBox x:Name="ServiceNameTextBox" Text="" Height="40" Margin="0,0,0,20"/>
+
+            <!-- КАРТОЧКА СТОИМОСТИ -->
+            <Border Background="White" CornerRadius="10" BorderBrush="#DCDDE1" BorderThickness="1" Padding="15">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="1" Opacity="0.05"/>
+                </Border.Effect>
+                <StackPanel>
+                    <TextBlock Text="ЦЕНА УСЛУГИ (РУБ)" FontSize="9" FontWeight="Bold" Foreground="#27AE60" Margin="2,0,0,5"/>
+                    <TextBox x:Name="ServicePriceTextBox" FontSize="24" FontWeight="Black" Foreground="#27AE60" 
+                             BorderThickness="0" Background="Transparent" Padding="0" Height="Auto"/>
+                    <Separator Height="1" Background="#F1F2F6" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Margin="0,0,0,15">
-            <TextBlock Text="Цена указана в рублях (без копеек)" FontWeight="Regular" FontSize="11" Foreground="Gray"/>
-        </StackPanel>
+        <!-- КНОПКИ -->
+        <Grid Grid.Row="2" Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="CancelButton" Content="Отмена" Width="80" Height="30" Margin="0,0,10,0" Click="CancelButton_Click"/>
-            <Button x:Name="SaveButton" Content="Сохранить" Width="80" Height="30" Click="SaveButton_Click"/>
-        </StackPanel>
+            <Button Content="СОХРАНИТЬ" Style="{StaticResource PrimaryButtonStyle}" 
+                    Background="#27AE60" Click="SaveButton_Click" Cursor="Hand"/>
+
+            <Button Content="ОТМЕНА" Grid.Column="1" 
+                    Style="{StaticResource SecondaryButtonStyle}" 
+                    Click="CancelButton_Click" 
+                    Width="100" Margin="15,0,0,0" Cursor="Hand"/>
+        </Grid>
     </Grid>
 </Window>

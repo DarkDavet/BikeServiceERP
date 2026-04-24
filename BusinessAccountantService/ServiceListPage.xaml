@@ -51,7 +51,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="СЕРВИСЫ" FontSize="24" FontWeight="Black" Foreground="#2C3E50"/>
+                <TextBlock Text="ПЕРЕЧЕНЬ УСЛУГ/РАБОТ" FontSize="24" FontWeight="Black" Foreground="#2C3E50"/>
             </StackPanel>
 
             <Border Grid.Column="1" x:Name="SearchBorder" 
@@ -124,7 +124,6 @@
         <Grid Grid.Row="3" Margin="0,20,0,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <Button Content="+ НОВАЯ УСЛУГА" Style="{StaticResource ActionButtonStyle}" Background="#27AE60" Click="AddService_Click" Margin="0,0,10,0"/>
-                <Button Content="ИЗМЕНИТЬ" Style="{StaticResource ActionButtonStyle}" Background="#3498DB" Click="EditService_Click" Margin="0,0,10,0"/>
                 <Button Content="УДАЛИТЬ" Style="{StaticResource ActionButtonStyle}" Background="#E74C3C" Click="DeleteService_Click" Margin="0,0,10,0"/>
             </StackPanel>
         </Grid>

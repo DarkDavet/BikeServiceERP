@@ -77,7 +77,7 @@
                 <Button Name="BtnAllClients" Content="👥 Все клиенты и заказы" Style="{StaticResource MenuButtonStyle}" Click="ShowAllClients_Click"/>
                 <Button Name="BtnActiveOrders" Content="🔧 В работе" Style="{StaticResource MenuButtonStyle}" Click="ShowActiveOrders_Click"/>
                 <Button Name="BtnArchive" Content="📁 Архив выдачи" Style="{StaticResource MenuButtonStyle}" Click="ShowArchive_Click"/>
-                <Button Name="BtnServices" Content="🔧 Услуги" Style="{StaticResource MenuButtonStyle}" Click="ShowServices_Click"/>
+                <Button Name="BtnServices" Content="📋 Услуги" Style="{StaticResource MenuButtonStyle}" Click="ShowServices_Click"/>
             </StackPanel>
 
             <!-- 3. НИЖНИЙ БЛОК (СКЛАД И АНАЛИТИКА) -->
