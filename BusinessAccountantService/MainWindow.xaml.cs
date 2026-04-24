@@ -76,11 +76,13 @@ namespace BusinessAccountantService
             BtnAllClients.ClearValue(Button.BackgroundProperty);
             BtnActiveOrders.ClearValue(Button.BackgroundProperty);
             BtnArchive.ClearValue(Button.BackgroundProperty);
+            BtnServices.ClearValue(Button.BackgroundProperty);
 
             // Сбрасываем текст (ClearValue заставит кнопку взять цвет из стиля)
             BtnAllClients.ClearValue(Button.ForegroundProperty);
             BtnActiveOrders.ClearValue(Button.ForegroundProperty);
             BtnArchive.ClearValue(Button.ForegroundProperty);
+            BtnServices.ClearValue(Button.FocusableProperty);
 
             // 2. Активируем выбранную кнопку
             if (activeBtn != null)
