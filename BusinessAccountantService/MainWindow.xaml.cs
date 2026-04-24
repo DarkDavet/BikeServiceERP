@@ -101,6 +101,12 @@ namespace BusinessAccountantService
 
 
 
+        private void ShowServices_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new ServiceListPage());
+            HighlightButton(BtnServices);
+        }
+
         private void ShowMonthlyStats_Click(object sender, RoutedEventArgs e)
         {
             AnalyticsWindow analyticsWin = new AnalyticsWindow();

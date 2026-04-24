@@ -1,0 +1,36 @@
+﻿<Window x:Class="BusinessAccountantService.EditServiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BusinessAccountantService"
+        mc:Ignorable="d"
+        Title="Редактировать услугу" Height="300" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,15">
+            <TextBlock Text="Название услуги:" FontWeight="SemiBold" Margin="0,0,0,5"/>
+            <TextBox x:Name="ServiceNameTextBox" Text="" TextWrapping="Wrap" Height="25" FontSize="13"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="0,0,0,15">
+            <TextBlock Text="Цена услуги:" FontWeight="SemiBold" Margin="0,0,0,5"/>
+            <TextBox x:Name="ServicePriceTextBox" Text="" TextWrapping="Wrap" Height="25" FontSize="13"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="0,0,0,15">
+            <TextBlock Text="Цена указана в рублях (без копеек)" FontWeight="Regular" FontSize="11" Foreground="Gray"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="CancelButton" Content="Отмена" Width="80" Height="30" Margin="0,0,10,0" Click="CancelButton_Click"/>
+            <Button x:Name="SaveButton" Content="Сохранить" Width="80" Height="30" Click="SaveButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
